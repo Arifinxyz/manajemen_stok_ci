@@ -41,6 +41,6 @@ class Stock_in extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable('stock_in');
     }
 }

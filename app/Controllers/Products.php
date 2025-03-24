@@ -5,14 +5,21 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ProductsModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Products extends BaseController
 {
     public function index()
     {
-        $model = new ProductsModel();
-        $data['products'] = $model->findAll();
-        return view('products/index', $data);
+        $productModel = new ProductsModel();
+        $products = $productModel->findAll();
+    
+        foreach ($products as &$product) {
+            $generator = new BarcodeGeneratorPNG();
+            $product['barcode'] = base64_encode($generator->getBarcode($product['product_code'], $generator::TYPE_CODE_128));
+        }
+    
+        return view('products/index', ['products' => $products]);
     }
 
     public function create()
@@ -31,19 +38,13 @@ class Products extends BaseController
         $model->insert($data);
         return redirect()->to('/products');
     }
-    public function edit($id)
-    {
-        $model = new ProductsModel();
-        $data['product'] = $model->find($id);
-        return view('products/edit', $data);
-    }
     
     public function update($id)
     {
         $model = new ProductsModel();
         $data = [
             'name' => $this->request->getVar('name'),
-            'price' => $this->request->getVar('price'),
+            'product_code' => $this->request->getVar('product_code'),
             'stock' => $this->request->getVar('stock'),
         ];
         $model->update($id, $data);
