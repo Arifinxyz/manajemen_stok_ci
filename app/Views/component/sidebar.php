@@ -35,7 +35,7 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/stock_in">
+                <a class="nav-link" href="/stockin">
                     <i class="fas fa-fw fa-box"></i>
                     <span>Stock In</span>
                 </a>

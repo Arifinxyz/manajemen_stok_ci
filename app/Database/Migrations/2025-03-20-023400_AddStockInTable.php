@@ -35,7 +35,8 @@ class Stock_in extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('stock_in');
+        $this->forge->addForeignKey('product_id', 'products', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable(table: 'stock_in');
 
     }
 

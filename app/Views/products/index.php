@@ -1,7 +1,7 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
 <div class="h-100">
-    <div class="container bg-white p-3 mb-4">
+    <div class="shadow-sm rounded container bg-white p-3 mb-4">
         <h1>Product</h1>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">
             Create
@@ -9,7 +9,7 @@
         <table class="table" border="1">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Products Name</th>
                     <th>Product Code</th>
                     <th>Barcode</th>
                     <th>Stock</th>
@@ -39,7 +39,7 @@
                                 data-bs-target="#editProductModal">
                                 Create
                             </button>
-                            <a href="/products/delete/<?= $product['id'] ?>">Delete</a>
+                            <a href="/products/delete/<?= $product['id'] ?>" class="btn btn-danger" >Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -47,6 +47,7 @@
         </table>
     </div>
 </div>
+
 <?= $this->include('products/create') ?>
 
 <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">

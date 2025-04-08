@@ -22,10 +22,6 @@ class Products extends BaseController
         return view('products/index', ['products' => $products]);
     }
 
-    public function create()
-    {
-        return view('products/create');
-    }
 
     public function store()
     {

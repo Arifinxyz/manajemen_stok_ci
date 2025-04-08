@@ -36,6 +36,8 @@ class Stock_out extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('product_id', 'products', 'id', 'CASCADE', 'CASCADE');
+
         $this->forge->createTable('stock_out');
     }
 
