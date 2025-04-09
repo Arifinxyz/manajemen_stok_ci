@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class StockOut extends Model
+class StockOutModel  extends Model
 {
-    protected $table            = 'stockouts';
+    protected $table            = 'stock_out';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
-
+    protected $allowedFields = ['product_id', 'quantity', 'created_at', 'updated_at'];
+    public $timestamps = true;
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
