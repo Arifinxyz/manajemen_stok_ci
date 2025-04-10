@@ -18,7 +18,7 @@ class Products extends BaseController
             $generator = new BarcodeGeneratorPNG();
             $product['barcode'] = base64_encode($generator->getBarcode($product['product_code'], $generator::TYPE_CODE_128));
         }
-    
+        requireLogin();
         return view('products/index', ['products' => $products]);
     }
 

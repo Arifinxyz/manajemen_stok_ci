@@ -19,3 +19,7 @@ $routes->post('stockin/store', 'StockInController::store');
 $routes->get('stockout', to: 'StockOutController::index');
 $routes->get('stockout/validateBarcode', 'StockOutController::validateBarcode');
 $routes->post('stockout/store', 'StockOutController::store');
+
+$routes->get('/login', 'AuthController::login');
+$routes->post('/auth/processLogin', 'AuthController::processLogin');
+$routes->get('/logout', 'AuthController::logout');

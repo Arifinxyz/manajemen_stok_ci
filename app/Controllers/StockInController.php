@@ -11,6 +11,7 @@ class StockInController extends BaseController
 {
     public function index()
     {
+        requireLogin();
         return view('stock_in/index');
     }
 

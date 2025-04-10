@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item <?= uri_string() == '' ? 'active' : ''  ?>">
         <a class="nav-link" href="<?= base_url() ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -27,14 +27,14 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item  <?= uri_string() == 'products' ? 'active' : '' ?>">
         <a class="nav-link" href="/products">
             <i class="fas fa-fw fa-boxes"></i>
             <span>Products</span>
         </a>
 
     </li>
-    <li class="nav-item">
+    <li class="nav-item <?=uri_string() == 'stockin' ? 'active' : ''?>">
         <a class="nav-link" href="/stockin">
             <i class="fas fa-fw fa-box"></i>
             <span>Stock In</span>
@@ -42,7 +42,7 @@
 
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/stockout">
+        <a class="nav-link <?=uri_string() == 'stockout' ? 'active' : ''?>" href="/stockout">
             <i class="fas fa-fw fa-box-open"></i>
             <span>Stock Out</span>
         </a>

@@ -11,6 +11,7 @@ class Home extends BaseController
 {
     public function index()
 {
+    requireLogin();
     $productModel = new ProductsModel();
     $stockInModel = new StockInModel();
     $stockOutModel = new StockOutModel();
@@ -64,6 +65,9 @@ class Home extends BaseController
             'total' => (int)($out['quantity'] ?? 0)
         ];
     }
+
+    $role = session()->get('role');
+
 
     return view('index', [
         'productCount' => $productCount,

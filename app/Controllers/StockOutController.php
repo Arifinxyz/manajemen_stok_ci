@@ -10,6 +10,7 @@ class StockOutController extends BaseController
 {
     public function index()
     {
+        requireLogin();
         return view('stock_out/index');
     }
 
