@@ -11,40 +11,38 @@ class StockInController extends BaseController
 {
     public function index()
     {
+        requireLogin();
+
         return view('stock_in/index');
     }
     public function data()
     {
         requireLogin();
-
+    
         $stockModel = new StockInModel();
-
-        // Ambil filter bulan dan tahun dari request
-        $month = $this->request->getVar('month');
-        $year = $this->request->getVar('year');
-
-        // Query data berdasarkan filter
+    
+        $month = $this->request->getGet('month') ?? '';
+        $year = $this->request->getGet('year') ?? '';
+    
         $query = $stockModel->select('stock_in.*, products.name as product_name')
             ->join('products', 'products.id = stock_in.product_id');
-
-        if ($month) {
+    
+        if (!empty($month)) {
             $query->where('MONTH(stock_in.created_at)', $month);
         }
-        if ($year) {
+        if (!empty($year)) {
             $query->where('YEAR(stock_in.created_at)', $year);
         }
-
-        // Pagination
+    
         $data['stock_in'] = $query->paginate(10);
         $data['pager'] = $stockModel->pager;
-
-        // Kirim data bulan dan tahun untuk form filter
+    
         $data['month'] = $month;
         $data['year'] = $year;
-
+    
         return view('stock_in/data', $data);
     }
-
+    
     public function print($month = null, $year = null)
 {
     requireLogin();

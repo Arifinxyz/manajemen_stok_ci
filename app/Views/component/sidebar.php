@@ -30,14 +30,21 @@
     <li class="nav-item  <?= uri_string() == 'products' ? 'active' : '' ?>">
         <a class="nav-link" href="/products">
             <i class="fas fa-fw fa-boxes"></i>
-            <span>Products</span>
+            <span>Daftar Produk</span>
         </a>
 
     </li>
     <li class="nav-item <?=uri_string() == 'stockin' ? 'active' : ''?>">
         <a class="nav-link" href="/stockin">
             <i class="fas fa-fw fa-box"></i>
-            <span>Stock In</span>
+            <span>Stok Masuk</span>
+        </a>
+
+    </li>
+    <li class="nav-item <?=uri_string() == 'stockin_data' ? 'active' : ''?>">
+        <a class="nav-link" href="/stockin_data">
+            <i class="fas fa-fw fa-box"></i>
+            <span>Data Stok Masuk</span>
         </a>
 
     </li>
