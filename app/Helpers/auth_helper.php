@@ -11,3 +11,19 @@ function requireLogin()
         exit;
     }
 }
+
+
+function adminRole()
+{
+    return session()->get('role') === 'admin';
+}
+
+function petugsaRole()
+{
+    return session()->get('role') === 'petugas';
+}
+
+function hrdRole()
+{
+    return session()->get('role') === 'hrd';
+}

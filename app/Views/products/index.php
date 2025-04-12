@@ -3,9 +3,12 @@
 <div class="h-100">
     <div class="shadow-sm rounded container bg-white p-3 mb-4">
         <h1>Product</h1>
+
+        <?php if (hrdRole()):?>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProductModal">
             Create
         </button>
+        <?php endif; ?>
         <table class="table" border="1">
             <thead>
                 <tr>
@@ -13,7 +16,9 @@
                     <th>Product Code</th>
                     <th>Barcode</th>
                     <th>Stock</th>
+                    <?php if (hrdRole()):?>
                     <th>Action</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +37,7 @@
                                 </a>
                             </td>
                             <td><?= $product['stock'] ?></td>
+                            <?php if (hrdRole()):?>
                             <td>
                                 <button type="button" class="btn btn-warning edit-product-btn" data-bs-toggle="modal"
                                     data-bs-target="#editProductModal" data-id="<?= $product['id'] ?>"
@@ -41,6 +47,7 @@
                                 </button>
                                 <a href="/products/delete/<?= $product['id'] ?>" class="btn btn-danger">Delete</a>
                             </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -49,10 +56,11 @@
     </div>
 </div>
 
-<!-- Include Form Create Product -->
+<?php if (hrdRole()){ ?>
+
 <?= $this->include('products/create') ?>
 
-<?php if (!empty($products)): ?>
+<?php if (!empty($products)){ ?>
     
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -83,7 +91,7 @@
         </div>
     </div>
 
-<?php endif; ?>
+<?php }} ?>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

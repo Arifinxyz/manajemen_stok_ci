@@ -13,8 +13,10 @@ $routes->post('/products/update/(:num)', 'Products::update/$1');
 $routes->get('/products/delete/(:num)', 'Products::delete/$1');
 //
 $routes->get('stockin', 'StockInController::index');
+$routes->get('stockin_data', 'StockInController::data');
 $routes->get('stockin/validateBarcode', 'StockInController::validateBarcode');
 $routes->post('stockin/store', 'StockInController::store');
+$routes->get('stockin/print/', 'StockInController::print');
 //
 $routes->get('stockout', to: 'StockOutController::index');
 $routes->get('stockout/validateBarcode', 'StockOutController::validateBarcode');
@@ -23,3 +25,5 @@ $routes->post('stockout/store', 'StockOutController::store');
 $routes->get('/login', 'AuthController::login');
 $routes->post('/auth/processLogin', 'AuthController::processLogin');
 $routes->get('/logout', 'AuthController::logout');
+
+
