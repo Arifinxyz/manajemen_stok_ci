@@ -1,12 +1,13 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
+
 <main class="h-100">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
         <h2>Stock In</h2>
 
         <div class="mb-3">
             <label>Scan Barcode</label>
-            <input type="text" id="barcode" class="form-control" placeholder="Scan barcode..." autofocus>
+            <input type="text" id="barcode" class="form-control" placeholder="Scan barcode..." autofocus autocomplete="off">
             <div id="error-message" class="text-danger mt-2"></div>
         </div>
 
@@ -30,12 +31,23 @@
     const cartBody = document.getElementById('cart-body');
     const errorMessage = document.getElementById('error-message');
     let cart = [];
+    let typingTimer;
+    const doneTypingInterval = 500; // 0.5 detik setelah input berhenti
 
-    barcodeInput.addEventListener('change', function () {
-        const barcode = this.value.trim();
+    barcodeInput.addEventListener('input', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(processBarcode, doneTypingInterval);
+    });
+
+    barcodeInput.addEventListener('keydown', function () {
+        clearTimeout(typingTimer); // reset timer saat user masih mengetik
+    });
+
+    function processBarcode() {
+        const barcode = barcodeInput.value.trim();
         if (!barcode) return;
 
-        fetch(`<?= base_url('stockin/validateBarcode') ?>?barcode=` + barcode)
+        fetch(`<?= base_url('stockin/validateBarcode') ?>?barcode=` + encodeURIComponent(barcode))
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -48,12 +60,19 @@
                     updateCart();
                     errorMessage.textContent = '';
                 } else {
-                    errorMessage.textContent = data.message;
+                    errorMessage.textContent = data.message || 'Product not found!';
                 }
+
+                barcodeInput.value = '';
+                barcodeInput.focus();
+            })
+            .catch(error => {
+                errorMessage.textContent = 'Error validating barcode!';
+                console.error(error);
                 barcodeInput.value = '';
                 barcodeInput.focus();
             });
-    });
+    }
 
     function updateCart() {
         cartBody.innerHTML = '';
@@ -83,15 +102,20 @@
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if (data.success) {
                 alert('Stock In successful!');
                 cart = [];
                 updateCart();
+                barcodeInput.focus();
             } else {
                 alert(data.message || 'Error submitting data!');
             }
+        })
+        .catch(error => {
+            alert('Something went wrong!');
+            console.error(error);
         });
     });
 </script>
+
 <?= $this->endSection() ?>

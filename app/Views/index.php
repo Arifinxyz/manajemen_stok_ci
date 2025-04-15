@@ -32,6 +32,13 @@
     <canvas id="stockChart"></canvas>
 </div>
 
+<!-- Input Barcode -->
+<div class="container mt-5">
+    <h4>Scan Barcode</h4>
+    <input type="text" id="barcode" class="form-control" placeholder="Scan barcode..." autofocus autocomplete="off">
+    <div id="error-message" class="text-danger mt-2"></div>
+</div>
+
 <!-- Chart.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -66,5 +73,45 @@
             }
         }
     });
+
+    // Auto-submit barcode logic
+    const barcodeInput = document.getElementById('barcode');
+    const errorMessage = document.getElementById('error-message');
+    let typingTimer;
+    const doneTypingInterval = 500; // 0.5 seconds
+
+    barcodeInput.addEventListener('input', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(submitBarcode, doneTypingInterval);
+    });
+
+    barcodeInput.addEventListener('keydown', function () {
+        clearTimeout(typingTimer); // Reset timer if still typing
+    });
+
+    function submitBarcode() {
+        const barcode = barcodeInput.value.trim();
+        if (!barcode) return;
+
+        // Call backend to validate barcode
+        fetch(`<?= base_url('stockout/validateBarcode') ?>?barcode=` + encodeURIComponent(barcode))
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Barcode submitted successfully: ' + barcode);
+                    errorMessage.textContent = ''; // Clear error message
+                } else {
+                    errorMessage.textContent = data.message || 'Barcode not found!';
+                }
+                barcodeInput.value = ''; // Reset input
+                barcodeInput.focus(); // Keep focus
+            })
+            .catch(error => {
+                errorMessage.textContent = 'Error submitting barcode!';
+                console.error(error);
+                barcodeInput.value = ''; // Reset input
+                barcodeInput.focus(); // Keep focus
+            });
+    }
 </script>
 <?= $this->endSection() ?>
