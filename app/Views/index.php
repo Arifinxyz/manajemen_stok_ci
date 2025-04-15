@@ -35,7 +35,7 @@
 <!-- Input Barcode -->
 <div class="container mt-5">
     <h4>Scan Barcode</h4>
-    <input type="text" id="barcode" class="form-control" placeholder="Scan barcode..." autofocus autocomplete="off">
+    <input type="text" id="barcode" class="form-controaArifinxyzl" placeholder="Scan barcode..." autofocus autocomplete="off">
     <div id="error-message" class="text-danger mt-2"></div>
 </div>
 
