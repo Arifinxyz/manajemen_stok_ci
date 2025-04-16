@@ -1,4 +1,4 @@
-<?= $this->extend('component/base') ?>
+i<?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
 
 <h1>Edit User</h1>

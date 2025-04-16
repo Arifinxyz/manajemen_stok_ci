@@ -1,14 +1,14 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
-<main class="h-100">
+<main class="h-100 m-5">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
-        <h2>Stock In Data</h2>
+        <h2>Data Stock Masuk</h2>
 
         <!-- Filter Form -->
         <!-- Filter Form -->
 <form id="filterForm" class="row g-3 mb-4" method="get" action="">
     <div class="col-md-4">
-        <label for="month" class="form-label">Filter by Month</label>
+        <label for="month" class="form-label">Filter Bulan</label>
         <select name="month" id="month" class="form-select">
             <option value="">All</option>
             <?php for ($i = 1; $i <= 12; $i++): ?>
@@ -19,7 +19,7 @@
         </select>
     </div>
     <div class="col-md-4">
-        <label for="year" class="form-label">Filter by Year</label>
+        <label for="year" class="form-label">Filter Tahun</label>
         <select name="year" id="year" class="form-select">
             <option value="">All</option>
             <?php for ($i = 2020; $i <= date('Y'); $i++): ?>
@@ -33,10 +33,10 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <th>Bayak Produk</th>
+                    <th>Tanggal</th>
                 </tr>
             </thead>
             <tbody id="stockInTableBody">
@@ -51,7 +51,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="4" class="text-center">No data available</td>
+                        <td colspan="4" class="text-center">Data Tidak Tersedia</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

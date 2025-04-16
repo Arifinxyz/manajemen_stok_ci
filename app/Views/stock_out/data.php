@@ -1,6 +1,6 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
-<main class="h-100">
+<main class="h-100 m-5">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
         <h2>Data Stok Keluar</h2>
 
@@ -33,15 +33,15 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <yak>Banyak Produk</th>
+                    <th>Tanggal</th>
                 </tr>
             </thead>
             <tbody id="stockInTableBody">
-                <?php if (!empty($stock_in)): ?>
-                    <?php foreach ($stock_in as $item): ?>
+                <?php if (!empty($stock_out)): ?>
+                    <?php foreach ($stock_out as $item): ?>
                         <tr>
                             <td><?= $item['id'] ?></td>
                             <td><?= $item['product_name'] ?></td>
@@ -51,7 +51,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="4" class="text-center">No data available</td>
+                        <td colspan="4" class="text-center">Data Tidak Tersedia</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
@@ -59,7 +59,7 @@
 
         <!-- Print Button -->
         <div class="mt-3">
-            <a id="printButton" href="<?= base_url('stockin/print') ?>" class="btn btn-success">Print Excel</a>
+            <a id="printButton" href="<?= base_url('stockout/print') ?>" class="btn btn-success">Print Excel</a>
         </div>
     </div>
 </main>
@@ -72,7 +72,7 @@
     function updatePrintLink() {
         const m = month.value || '';
         const y = year.value || '';
-        printButton.href = `<?= base_url('stockin/print') ?>/${m}/${y}`;
+        printButton.href = `<?= base_url('stockout/print') ?>/${m}/${y}`;
     }
 
     // Update print link saat dropdown berubah

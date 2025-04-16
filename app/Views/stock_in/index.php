@@ -1,9 +1,9 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
 
-<main class="h-100">
+<main class="h-100 300 m-5">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
-        <h2>Stock In</h2>
+        <h2>Stock Masuk</h2>
 
         <div class="mb-3">
             <label>Scan Barcode</label>
