@@ -25,6 +25,16 @@
         Antarmuka
     </div>
 
+    <?php if(hrdRole()){ ?>
+        <li class="nav-item  <?= uri_string() == 'users' ? 'active' : '' ?>">
+        <a class="nav-link" href="/users">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Daftar Pengguna</span>
+        </a>
+
+    </li>
+    <?php } ?>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item  <?= uri_string() == 'products' ? 'active' : '' ?>">
         <a class="nav-link" href="/products">

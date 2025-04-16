@@ -45,9 +45,8 @@
     <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
         aria-labelledby="userDropdown">
         <li>
-            <a class="dropdown-item" href="/logout" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
+            <a class="dropdown-item" href="/logout" data-bs-toggle="moda">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
             </a>
         </li>
     </ul>

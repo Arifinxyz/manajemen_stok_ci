@@ -22,17 +22,18 @@ $routes->get('stockout', to: 'StockOutController::index');
 $routes->get('stockout/validateBarcode', 'StockOutController::validateBarcode');
 $routes->post('stockout/store', 'StockOutController::store');
 $routes->get('stockout/print/', 'StockoutController::print');
-$routes->get('stockout/data', 'StockoutController::data');
+$routes->get( 'stockout/data', 'StockoutController::data');
 
 $routes->get('/login', 'AuthController::login');
 $routes->post('/auth/processLogin', 'AuthController::processLogin');
 $routes->get('/logout', 'AuthController::logout');
 
 $routes->get('/users', 'UserController::index');
-$routes->get('/users/create', 'UserController::createForm');
-$routes->post('/users/store', 'UserController::store');
+$routes->get('/user/create', 'UserController::create');
+$routes->post('/user/store', 'UserController::store');
 $routes->get('/users/edit/(:num)', 'UserController::edit/$1');
 $routes->post('/users/update/(:num)', 'UserController::update/$1');
 $routes->get('/users/delete/(:num)', 'UserController::delete/$1');
+
 
 

@@ -3,143 +3,69 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use CodeIgniter\Controller;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
-    protected $userModel;
-
-    public function __construct()
-    {
-        $this->userModel = new UserModel();
-    }
-
-    // Menampilkan daftar semua user (khusus HRD)
     public function index()
     {
-        requireLogin();
-
-        if (hrdRole()) {
-            $data['users'] = $this->userModel->findAll();
-            return view('Account/index', $data);
-        }
-
-        return redirect()->route('/');
+        $userModel = new \App\Models\UserModel();
+        $users = $userModel->findAll();
+    
+        return view('Account/index', ['users' => $users]);
     }
-    public function createForm()
+
+    public function create()
     {
-        requireLogin();
-    
-        if (hrdRole()) {
-            return view('Account/create');
-        }
-    
-        return redirect()->route('/');
+        return view('Account/create');
     }
-    
+
     public function store()
     {
-        requireLogin();
-    
-        if (hrdRole()) {
-            if ($this->request->getMethod() === 'post') {
-                $validation = \Config\Services::validation();
-                $validation->setRules([
-                    'name' => 'required|min_length[3]|max_length[50]',
-                    'email' => 'required|valid_email|is_unique[users.email]',
-                    'password' => 'required|min_length[6]',
-                ]);
-    
-                if (!$validation->withRequest($this->request)->run()) {
-                    return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-                }
-    
-                $data = [
-                    'name' => $this->request->getPost('name'),
-                    'email' => $this->request->getPost('email'),
-                    'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                ];
-    
-                if ($this->userModel->save($data)) {
-                    return redirect()->to('/users')->with('success', 'User created successfully.');
-                } else {
-                    return redirect()->back()->withInput()->with('error', 'Failed to save user.');
-                }
-            }
+        // Validasi input
+        if (!$this->validate([
+            'name' => 'required|min_length[3]|max_length[100]',
+            'email' => 'required|valid_email|is_unique[users.email]',
+            'password' => 'required|min_length[6]',
+            'role' => 'required|in_list[petugas,hrd,pabrik]'
+        ])) {
+            return redirect()->to('/user/create')->withInput()->with('errors', $this->validator->getErrors());
         }
-    
-        return redirect()->route('/');
+
+        // Ambil data inputan
+        $userModel = new UserModel();
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_BCRYPT), // Hash password
+            'role' => $this->request->getPost('role')
+        ];
+
+        // Simpan data user ke database
+        $userModel->save($data);
+
+        return redirect()->to('/user/create')->with('success', 'User berhasil ditambahkan!');
     }
-    // Menampilkan form edit user
+
     public function edit($id)
-    {
-        requireLogin();
+{
+    $userModel = new UserModel();
+    $user = $userModel->find($id);
 
-        if (hrdRole()) {
-            $user = $this->userModel->find($id);
-
-            if (!$user) {
-                return redirect()->to('/users')->with('error', 'User not found.');
-            }
-
-            return view('Account/edit', ['user' => $user]);
-        }
-
-        return redirect()->route('/');
+    if (!$user) {
+        return redirect()->to('/users')->with('error', 'User tidak ditemukan.');
     }
 
-    // Menyimpan update data user
-    public function update($id)
-    {
-        requireLogin();
+    return view('Account/edit', ['user' => $user]);
+}
 
-        if (hrdRole()) {
-            if ($this->request->getMethod() === 'post') {
-                $validation = \Config\Services::validation();
-                $validation->setRules([
-                    'name' => 'required|min_length[3]|max_length[50]',
-                    'email' => 'required|valid_email',
-                    'password' => 'permit_empty|min_length[6]',
-                ]);
+public function delete($id)
+{
+    $userModel = new UserModel();
+    $userModel->delete($id);
 
-                if (!$validation->withRequest($this->request)->run()) {
-                    return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-                }
+    return redirect()->to('/users')->with('success', 'User berhasil dihapus.');
+}
 
-                $data = [
-                    'name' => $this->request->getPost('name'),
-                    'email' => $this->request->getPost('email'),
-                ];
 
-                if ($this->request->getPost('password')) {
-                    $data['password'] = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
-                }
-
-                $this->userModel->update($id, $data);
-
-                return redirect()->to('/users')->with('success', 'User updated successfully.');
-            }
-        }
-
-        return redirect()->route('/');
-    }
-
-    // Menghapus user
-    public function delete($id)
-    {
-        requireLogin();
-
-        if (hrdRole()) {
-            $user = $this->userModel->find($id);
-
-            if (!$user) {
-                return redirect()->to('/users')->with('error', 'User not found.');
-            }
-
-            $this->userModel->delete($id);
-
-            return redirect()->to('/users')->with('success', 'User deleted successfully.');
-        }
-
-        return redirect()->route('/');
-    }
 }

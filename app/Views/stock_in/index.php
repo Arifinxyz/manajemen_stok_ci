@@ -1,7 +1,7 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
 
-<main class="h-100 300 m-5">
+<main class="h-100 300 m-5r">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
         <h2>Stock Masuk</h2>
 

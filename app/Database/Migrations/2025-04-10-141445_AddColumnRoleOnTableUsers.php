@@ -14,7 +14,7 @@ class AddColumnRoleOnTableUsers extends Migration
                 'constraint' => ['petugas', 'hrd', 'pabrik'],
                 'after' => 'password',
                 null => false,
-            ]
+            ],
         ]);
     }
 
