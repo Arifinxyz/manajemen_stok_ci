@@ -16,16 +16,16 @@ class UserSeeder extends Seeder
                 'role'     => 'petugas',
             ],
             [
-                'name' => 'hrd',
-                'email' => 'hrd@g.c',
+                'name' => 'userAdmin',
+                'email' => 'userAdmin@g.c',
                 'password' => password_hash('password', PASSWORD_DEFAULT),
-                'role'     => 'hrd',
+                'role'     => 'userAdmin',
             ],
             [
-                'name' => 'pabrik',
-                'email' => 'pabrik@g.c',
+                'name' => 'productAdmin',
+                'email' => 'productAdmin@g.c',
                 'password' => password_hash('password', PASSWORD_DEFAULT),
-                'role'     => 'pabrik',
+                'role'     => 'productAdmin',
             ],
         ];
 

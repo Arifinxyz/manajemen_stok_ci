@@ -1,9 +1,9 @@
 <?= $this->extend('component/base') ?>
 <?= $this->section('content') ?>
 
-<main class="h-100 300 m-5r">
+<main class="h-100 300 m-5">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
-        <h2>Stock Masuk</h2>
+        <h2>Stok Masuk</h2>
 
         <div class="mb-3">
             <label>Scan Barcode</label>
@@ -14,15 +14,15 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th width="100">Qty</th>
-                    <th width="100">Action</th>
+                    <th>Produk</th>
+                    <th width="100">Banyak Produk</th>
+                    <th width="100">Aksi</th>
                 </tr>
             </thead>
             <tbody id="cart-body"></tbody>
         </table>
 
-        <button class="btn btn-success" id="submitBtn">Submit</button>
+        <button class="btn btn-success" id="submitBtn">Simpan</button>
     </div>
 </main>
 

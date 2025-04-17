@@ -13,17 +13,17 @@ function requireLogin()
 }
 
 
-function adminRole()
+function productAdminRole()
 {
-    return session()->get('role') === 'admin';
+    return session()->get('role') === 'productAdmin';
 }
 
-function petugsaRole()
+function petugasRole()
 {
     return session()->get('role') === 'petugas';
 }
 
-function hrdRole()
+function userAdminRole()
 {
-    return session()->get('role') === 'hrd';
+    return session()->get('role') === 'userAdmin';
 }

@@ -4,7 +4,7 @@
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
         <div class="sidebar-brand-icon rotate-n-15">
         </div>
-        <div class="sidebar-brand-text mx-3">Aplikasi Gudang</div>
+        <div class="sidebar-brand-text mx-3">E-ASBARA</div>
     </a>
 
     <!-- Divider -->
@@ -25,7 +25,7 @@
         Antarmuka
     </div>
 
-    <?php if(hrdRole()){ ?>
+    <?php if(userAdminRole()){ ?>
         <li class="nav-item  <?= uri_string() == 'users' ? 'active' : '' ?>">
         <a class="nav-link" href="/users">
             <i class="fas fa-fw fa-user"></i>
@@ -44,6 +44,7 @@
 
     </li>
     <hr class="sidebar-divider">
+    <?php if (petugasRole()) {?>
     <li class="nav-item <?=uri_string() == 'stockin' ? 'active' : ''?>">
         <a class="nav-link" href="/stockin">
             <i class="fas fa-fw fa-box"></i>
@@ -51,6 +52,7 @@
         </a>
 
     </li>
+    <?php } ?>
     <li class="nav-item <?=uri_string() == 'stockin/data' ? 'active' : ''?>">
         <a class="nav-link" href="/stockin/data">
             <i class="fas fa-fw fa-box"></i>
@@ -58,6 +60,8 @@
         </a>
 
     </li>
+    <?php if (petugasRole()) {?>
+
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link <?=uri_string() == 'stockout' ? 'active' : ''?>" href="/stockout">
@@ -65,8 +69,9 @@
             <span>Stok Keluar</span>
         </a>
 
-    </li>
 
+    </li>
+    <?php } ?>
     <li class="nav-item">
         <a class="nav-link <?=uri_string() == 'stockout/data' ? 'active' : ''?>" href="/stockout/data">
             <i class="fas fa-fw fa-box-open"></i>

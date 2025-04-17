@@ -11,7 +11,13 @@ class StockOutController extends BaseController
     public function index()
     {
         requireLogin();
+        
+        if (!petugasRole()) {
+            return redirect()->to('/products')->with('error', 'Kamu Tidak Memiliki Akses');
+        }
+        
         return view('stock_out/index');
+
     }
 
 

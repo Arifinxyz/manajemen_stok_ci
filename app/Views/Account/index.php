@@ -3,10 +3,6 @@
 
 
 <main class="h-100 bg-white p-4 rounded shadow-sm m-5">
-    <div class="container mt-4">
-        <h2>Dashboard</h2>
-        <p>Selamat datang di halaman dashboard. Anda dapat mengelola data produk, stock in, stock out, dan user di sini.</p>
-    </div>
 <div class="container">
     <h2 class="my-4">Daftar User</h2>
 

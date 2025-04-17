@@ -2,10 +2,7 @@
 <?= $this->section('content') ?>
 <main class="h-100 m-5">
     <div class="container mt-4 bg-white p-4 rounded shadow-sm">
-        <h2>Data Stock Masuk</h2>
-
-        <!-- Filter Form -->
-        <!-- Filter Form -->
+        <h2>Data Stok Masuk</h2>
 <form id="filterForm" class="row g-3 mb-4" method="get" action="">
     <div class="col-md-4">
         <label for="month" class="form-label">Filter Bulan</label>

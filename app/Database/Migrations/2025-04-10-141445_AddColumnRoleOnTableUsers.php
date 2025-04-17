@@ -11,7 +11,7 @@ class AddColumnRoleOnTableUsers extends Migration
         $this->forge->addColumn('users', [
             'role' => [
                 'type' => 'ENUM',
-                'constraint' => ['petugas', 'hrd', 'pabrik'],
+                'constraint' => ['petugas', 'userAdmin', 'productAdmin'],
                 'after' => 'password',
                 null => false,
             ],

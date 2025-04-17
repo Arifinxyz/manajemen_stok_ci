@@ -9,6 +9,9 @@ class UserController extends Controller
 {
     public function index()
     {
+        if (!userAdminRole()) {
+            return redirect()->to('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
         $userModel = new \App\Models\UserModel();
         $users = $userModel->findAll();
     
@@ -17,11 +20,17 @@ class UserController extends Controller
 
     public function create()
     {
+        if (!userAdminRole()) {
+            return redirect()->to('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
         return view('Account/create');
     }
 
     public function store()
     {
+        if (!userAdminRole()) {
+            return redirect()->to('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
         // Validasi input
         if (!$this->validate([
             'name' => 'required|min_length[3]|max_length[100]',

@@ -13,6 +13,9 @@ class StockInController extends BaseController
     {
         requireLogin();
 
+        if (!petugasRole()) {
+            return redirect()->to('/products')->with('error', 'Kamu Tidak Memiliki Akses');
+        }
         return view('stock_in/index');
     }
     public function data()
